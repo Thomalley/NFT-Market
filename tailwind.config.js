@@ -10,13 +10,13 @@ module.exports = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'home-background': "url('/Bg.png)",
-      },
       colors: {
         'main-color': '#DDF247',
+        light: '#DEE8E8',
+        'text-in-bg': '#161616',
       },
       height: {
+        100: '410px',
         120: '430px',
         122: '550px',
       },
@@ -28,6 +28,10 @@ module.exports = {
       },
       boxShadow: {
         'card-shadow': '0px 30px 70px 0px #0A0A0A',
+      },
+      fontFamily: {
+        Manrope: ['Manrope', 'serif'],
+        AzeretMono: ['Azeret Mono', 'serif'],
       },
     },
   },

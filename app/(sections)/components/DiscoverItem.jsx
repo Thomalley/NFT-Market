@@ -8,28 +8,32 @@ import {
   ItemsIcon,
   StatusIcon,
   PriceRangeIcon,
-} from '../utils/svgs.jsx';
+} from '../../utils/svgs.jsx';
 import FeaturedItemCard from './FeaturedItemCard.jsx';
 import useAlchemy from '../../hooks/useAlchemy.jsx';
+import SkeletonCard from './SkeletonCard.jsx';
 
 export default function DiscoverItem() {
   const [sort, setSort] = useState([]);
   const options = ['option 1', 'option 2', 'option 3', 'option 4', 'option 5', 'option 6'];
   const { nfts } = useAlchemy(9, 17);
   return (
-    <div className='max-w-[1100px] mx-auto'>
+    <div className='max-w-[1100px] mx-auto mb-10'>
       <header className='flex justify-between'>
         <h1 className="text-[32px] font-extrabold">Discover Item</h1>
-        <h5 className='flex items-center gap-2 text-sm'>Discover More {DiscoverMoreIcon}</h5>
+        <div className='flex items-center gap-x-2 cursor-pointer hover:gap-x-4 transform duration-500'>
+          <h5 className='text-sm'>Discover More</h5>
+          {DiscoverMoreIcon}
+        </div>
       </header>
-      <div className='flex gap-5 mt-5'>
+      <div className='flex flex-col sm:flex-row gap-5 mt-5'>
         <Select
           selectionMode="single"
           placeholder="Category"
           startContent={CategoryIcon}
           selectedKeys={sort}
           aria-label="sort select"
-          className="w-48"
+          className="w-full sm:w-48"
           onSelectionChange={setSort}
           classNames={{
             trigger:
@@ -52,7 +56,7 @@ export default function DiscoverItem() {
           startContent={ItemsIcon}
           selectedKeys={sort}
           aria-label="sort select"
-          className="w-48"
+          className="w-full sm:w-48"
           onSelectionChange={setSort}
           classNames={{
             trigger:
@@ -75,7 +79,7 @@ export default function DiscoverItem() {
           startContent={StatusIcon}
           selectedKeys={sort}
           aria-label="sort select"
-          className="w-48"
+          className="w-full sm:w-48"
           onSelectionChange={setSort}
           classNames={{
             trigger:
@@ -98,7 +102,7 @@ export default function DiscoverItem() {
           startContent={PriceRangeIcon}
           selectedKeys={sort}
           aria-label="sort select"
-          className="w-48"
+          className="w-full sm:w-48"
           onSelectionChange={setSort}
           classNames={{
             trigger:
@@ -121,7 +125,7 @@ export default function DiscoverItem() {
           startContent={PriceRangeIcon}
           selectedKeys={sort}
           aria-label="sort select"
-          className="w-64"
+          className="w-full sm:w-64"
           onSelectionChange={setSort}
           classNames={{
             trigger:
@@ -139,10 +143,31 @@ export default function DiscoverItem() {
           ))}
         </Select>
       </div>
-      <div className='grid grid-cols-4 mt-8 gap-7'>
-        {nfts.map((n, index) => (
-          <FeaturedItemCard key={index} data={n} />
-        ))}
+      <div className='hidden sm:grid sm:grid-cols-4 mt-8 gap-7'>
+        {nfts.length ? nfts.map((n, index) => (
+          <FeaturedItemCard key={index} nft={n} />
+        )) : (
+          <>
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+          </>
+        )}
+      </div>
+      <div className='sm:hidden grid grid-cols-1 mt-8 gap-7'>
+        {nfts.length ? nfts.slice(0, 2).map((n, index) => (
+          <FeaturedItemCard key={index} nft={n} />
+        )) : (
+          <>
+            <SkeletonCard />
+            <SkeletonCard />
+          </>
+        )}
       </div>
     </div>
   );

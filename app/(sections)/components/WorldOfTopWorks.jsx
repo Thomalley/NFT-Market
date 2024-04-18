@@ -1,21 +1,17 @@
 'use client';
 
-// eslint-disable-next-line camelcase
-import { Azeret_Mono } from 'next/font/google';
 import { Button, Divider } from '@nextui-org/react';
 import { useState } from 'react';
 import Image from 'next/image';
-import { GoToIcon, SimpleArrow } from '../utils/svgs.jsx';
+import { GoToIcon, SimpleArrow } from '../../utils/svgs.jsx';
 import useAlchemy from '../../hooks/useAlchemy.jsx';
 import WorldOfTopCard from './WOTCard.jsx';
-import Butterfly from '../../public/Butterfly.png';
-import LittleBall from '../../public/LittleBall.png';
-import LittleSparkle from '../../public/LittleSparkle.png';
-import Sparkle from '../../public/Sparkle.png';
+import Butterfly from '../../../public/Butterfly.png';
+import LittleBall from '../../../public/LittleBall.png';
+import LittleSparkle from '../../../public/LittleSparkle.png';
+import Sparkle from '../../../public/Sparkle.png';
+import SkeletonCard from './SkeletonCard.jsx';
 
-const azeretMono = Azeret_Mono({
-  subsets: ['latin'],
-});
 export default function WorldOfTopWorks() {
   const [positionIndexes, setPositionIndexes] = useState([0, 1, 2, 3, 4, 5, 6]);
   const { nfts } = useAlchemy(0, 7);
@@ -49,7 +45,7 @@ export default function WorldOfTopWorks() {
   };
 
   return (
-    <div className="bg-[url('/Bg.png')] flex flex-col items-center h-fit bg-center bg-contain -mt-20">
+    <div className="bg-[url('/Bg.png')] flex flex-col items-center h-fit bg-center -mt-20">
       <header className='relative text-center mt-40'>
         <div className='absolute top-32 left-20 sm:top-44 2xl:-left-40'>
           <Image src={LittleBall} alt='Litle ball image' />
@@ -61,7 +57,7 @@ export default function WorldOfTopWorks() {
           <Image src={LittleBall} alt='Litle ball image' />
         </div>
         <h1 className="font-extrabold text-[54px] text-white">World Of Top Works</h1>
-        <span className={`${azeretMono.className} mt-5 text-white/55`}>
+        <span className='font-AzeretMono mt-5 text-white/55'>
           Welcome to the world of rare digital art. Explore the best art from <br />
           hand-picked digital artist out there and find the hidden gem.
         </span>
@@ -76,14 +72,14 @@ export default function WorldOfTopWorks() {
         </div>
       </header>
       <div className='mt-9 space-x-8'>
-        <Button isIconOnly radius='md' size="md" className=' w-40 bg-main-color'>
-          <span className='flex text-[#161616] font-extrabold gap-1 text-sm'>
+        <Button isIconOnly radius='md' size="md" className='w-40 bg-main-color'>
+          <span className='flex text-text-in-bg font-extrabold gap-1 text-sm'>
             Discover More
             {GoToIcon}
           </span>
         </Button>
-        <Button isIconOnly radius='md' size="md" className=' bg-[#ffffff] w-40'>
-          <span className='flex text-[#161616] font-extrabold gap-1 text-sm'>
+        <Button isIconOnly radius='md' size="md" className='bg-[#ffffff] w-40'>
+          <span className='flex text-text-in-bg font-extrabold gap-1 text-sm'>
             All Collections
             {GoToIcon}
           </span>
@@ -91,7 +87,7 @@ export default function WorldOfTopWorks() {
       </div>
       {/* carousel */}
       <div className='relative flex justify-center items-center overflow-y-hidden w-[90%] h-96 2xl:w-4/6 2xl:h-120'>
-        {nfts.map((nft, index) => (
+        {nfts.length ? (nfts.map((nft, index) => (
           <section
             key={nft.tokenId}
           >
@@ -126,7 +122,9 @@ export default function WorldOfTopWorks() {
               topPosition='15%'
             />
           </section>
-        ))}
+        ))) : (
+          <SkeletonCard />
+        )}
         <Button
           isIconOnly
           radius='full'

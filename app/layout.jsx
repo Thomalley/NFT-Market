@@ -1,17 +1,12 @@
 import './globals.css';
-
-import { Manrope } from 'next/font/google';
 import Providers from './providers.jsx';
 
-const manrope = Manrope({
-  subsets: ['latin'],
-});
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${manrope.className} bg-[#161616] dark`}>
+    <html lang="en" className='font-Manrope bg-text-in-bg dark'>
       <body>
         <Providers>
-          {children}
+            {children}
         </Providers>
       </body>
     </html>

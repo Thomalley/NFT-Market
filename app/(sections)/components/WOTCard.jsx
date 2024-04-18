@@ -1,8 +1,9 @@
 import {
-  Card, CardBody, CardFooter, Image,
+  Card, CardBody, CardFooter, Image, Button,
 } from '@nextui-org/react';
 import { motion } from 'framer-motion';
-import { EthIcon } from '../utils/svgs.jsx';
+import { EthIcon, HeartFavouriteIcon } from '../../utils/svgs.jsx';
+import { nftEthereumPriceFormatter } from '../../utils/functions';
 
 export default function WorldOfTopCard({
   nft,
@@ -48,30 +49,38 @@ export default function WorldOfTopCard({
       className={containerClassName}
     >
       <Card
-        className='w-[100%] h-fit lg:h-96 2xl:h-120 text-justify rounded-4xl p-5 bg-[#1E1E1E] shadow-card-shadow'
+        className='w-[100%] h-fit lg:h-80 2xl:h-100 mt-4 text-justify rounded-4xl p-5 bg-[#1E1E1E] shadow-card-shadow'
       >
         <CardBody>
           <div className='flex flex-row self-center justify-center overflow-auto w-fit h-fit'>
+            {positions[positionIndexes[index]] === 'center' && (
+              <section className='hidden sm:flex justify-between items-center absolute z-20 top-0 right-0 gap-x-2'>
+                <div className='flex w-fit h-7 gap-x-1 justify-center items-center rounded-full bg-[#585858] text-white font-extrabold text-sm px-3 py-1'>
+                  <h5>2h</h5>
+                  <h5>4m</h5>
+                  <h5>32s</h5>
+                </div>
+                {HeartFavouriteIcon}
+              </section>
+            )}
             <Image
-              radius="lg"
-              width={200}
-              height={200}
+              width={300}
+              height={300}
               alt='nft card'
-              style={{
-                jusfitySelf: 'center',
-                margin: 'auto',
-                borderRadius: '50%',
-                height: '100%',
-                width: '100%',
-              }}
+              className='max-w-full sm:w-64 sm:h-64 object-cover relative'
               src={nft.image.originalUrl}
             />
           </div>
+          {positions[positionIndexes[index]] === 'center' && (
+            <Button className='hidden sm:block w-28 h-11 bg-light text-text-in-bg font-extrabold text-sm px-4 absolute z-10 bottom-0 left-28'>
+              Place Bid
+            </Button>
+          )}
         </CardBody>
         <CardFooter className="flex flex-col text-lg justify-between">
           <div className='flex flex-col'>
             <p className="text-default-500 pr-2">{nft.name}</p>
-            <p className='flex gap-x-1 items-center'>{EthIcon} {(nft.contract.openSeaMetadata.floorPrice).toString().slice(0, 4)}</p>
+            <p className='flex gap-x-1 items-center'>{EthIcon} {nftEthereumPriceFormatter(nft.contract.openSeaMetadata.floorPrice)}</p>
           </div>
         </CardFooter>
       </Card>

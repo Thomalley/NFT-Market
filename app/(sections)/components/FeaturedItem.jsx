@@ -7,7 +7,7 @@ import { Button } from '@nextui-org/react';
 import { useRef, useState } from 'react';
 import {
   DiscoverMoreIcon, PaginationArrowIcon, PaginationPlusIcon, PaginationYellowPlusIcon,
-} from '../utils/svgs.jsx';
+} from '../../utils/svgs.jsx';
 import FeaturedItemCard from './FeaturedItemCard.jsx';
 import useAlchemy from '../../hooks/useAlchemy.jsx';
 import SkeletonCard from './SkeletonCard.jsx';
@@ -64,6 +64,7 @@ export default function FeaturedItem() {
           borderRadius: '10px',
           padding: '10px',
           display: 'flex',
+          marginTop: '10px',
           justifyContent: 'center',
           alignItems: 'center',
           textAlign: 'end',
@@ -72,7 +73,7 @@ export default function FeaturedItem() {
         <Button
           isIconOnly
           radius='full'
-          className={'bg-transparent'}
+          className='bg-transparent -mb-16'
           onClick={handlePrevPage}
         >
           <PaginationArrowIcon />
@@ -81,7 +82,7 @@ export default function FeaturedItem() {
         <Button
           isIconOnly
           radius='full'
-          className={'bg-transparent rotate-180'}
+          className='bg-transparent rotate-180 -mb-16'
           onClick={handleNextPage}
         >
           <PaginationArrowIcon />
@@ -89,7 +90,7 @@ export default function FeaturedItem() {
       </div>
     ),
     customPaging: (i) => (
-      <div className='h-5 flex items-center'>
+      <div className='h-5 mt-8 flex items-center'>
         {i === currentSlide ? <PaginationYellowPlusIcon /> : <PaginationPlusIcon />}
       </div>
     ),
@@ -99,7 +100,10 @@ export default function FeaturedItem() {
     <div className='max-w-[1100px] mx-auto' >
       <header className='flex justify-between'>
         <h1 className="text-[32px] font-extrabold">Featured Item</h1>
-        <h5 className='flex items-center gap-2 text-sm'>Discover More {DiscoverMoreIcon}</h5>
+        <div className='flex items-center gap-x-2 cursor-pointer hover:gap-x-4 transform duration-500'>
+          <h5 className='text-sm'>Discover More</h5>
+          {DiscoverMoreIcon}
+        </div>
       </header>
       <div className='flex flex-col gap-x-7 my-7'>
         {nfts.length ? <Slider

@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import StepbyStepPhoto from '../../public/StepByStep.png';
-import DiscoverPhoto from '../../public/Discover.png';
+import StepbyStepPhoto from '../../../public/StepByStep.png';
+import DiscoverPhoto from '../../../public/Discover.png';
 
 export default function StepByStep() {
   return (

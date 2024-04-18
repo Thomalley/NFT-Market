@@ -4,16 +4,70 @@ import { Avatar, Badge } from '@nextui-org/react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { EthIcon, YellowDropdownIcon } from '../utils/svgs.jsx';
-import cardInfo from '../utils/data';
+import {
+  CircleCarouselArrow, CircleCarouselYellowArrow, EthIcon, YellowDropdownIcon,
+} from '../../utils/svgs.jsx';
+import { cardInfo } from '../../utils/data';
 
 export default function TopSeller() {
+  function NextArrow(props) {
+    const { onClick } = props;
+    return (
+      <div
+        className='w-fit absolute top-16 -right-10 cursor-pointer hidden sm:block'
+        onClick={onClick}
+      >
+        <CircleCarouselYellowArrow />
+      </div>
+    );
+  }
+
+  function PrevArrow(props) {
+    const { onClick } = props;
+    return (
+      <div
+        className='w-fit absolute top-16 -left-10 cursor-pointer hidden sm:block'
+        onClick={onClick}
+      >
+        <CircleCarouselArrow />
+      </div>
+    );
+  }
   const settings = {
     dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 6,
     slidesToScroll: 1,
+    swipeToSlide: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 7,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
   };
   return (
     <div className='max-w-[1100px] mx-auto mt-14 mb-14'>
