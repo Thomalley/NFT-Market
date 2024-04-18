@@ -1,23 +1,14 @@
 import {
   Card,
   CardBody,
-  CardHeader,
   Divider,
 } from '@nextui-org/react';
-import { DescriptionIcon, EthIcon, GreyDropdownIcon } from '../../../utils/svgs.jsx';
+import { EthIcon } from '../../../utils/svgs.jsx';
 
 export default function Offers() {
   return (
     <div>
       <Card className='shadow-none w-[1100px] h-[319px] rounded-[20px] mt-6 bg-[#232323] px-2'>
-        <CardHeader className='flex flex-col items-start p-4'>
-          <div className='flex justify-between items-center gap-2 font-extrabold text-sm mb-4 w-full'>
-            <h3 className='flex gap-2'>{DescriptionIcon}Offers</h3>
-            <div>
-              {GreyDropdownIcon}
-            </div>
-          </div>
-        </CardHeader>
         <CardBody className='flex flex-col px-4 -mt-6 overflow-hidden font-AzeretMono'>
           <Divider className=' bg-white/5 w-full sm:w-[1050px] flex self-center' />
           <div className='flex justify-around text-start h-full items-center -mb-5 font-Manrope'>

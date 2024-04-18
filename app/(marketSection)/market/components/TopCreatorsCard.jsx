@@ -1,9 +1,21 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import {
   Avatar, Button, Card, CardBody, CardHeader,
 } from '@nextui-org/react';
 import { cardInfo } from '../../../utils/data';
+import SkeletonTopCreator from './SkeletonTopCreator.jsx';
 
 export default function TopCreatorsCard() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
+
   return (
     <Card className='w-[400px] h-[480px] bg-[#232323] p-3'>
       <CardHeader className='flex justify-between'>
@@ -12,7 +24,14 @@ export default function TopCreatorsCard() {
       </CardHeader>
       <CardBody className='mt-1'>
         <ol className='space-y-3'>
-          {cardInfo.slice(0, 5).map((c, index) => (
+          {loading ? (
+            <>
+              <SkeletonTopCreator />
+              <SkeletonTopCreator />
+              <SkeletonTopCreator />
+              <SkeletonTopCreator />
+            </>
+          ) : (cardInfo.slice(0, 5).map((c, index) => (
             <li key={index} className='flex justify-between items-center gap-4'>
               <div className='flex items-center gap-3'>
                 <h2 className='font-extrabold text-lg'>{index + 1}.</h2>
@@ -29,7 +48,7 @@ export default function TopCreatorsCard() {
               </div>
               <Button className='w-[100px] h-[44px] rounded-xl font-extrabold text-sm'>Follow</Button>
             </li>
-          ))}
+          )))}
         </ol>
       </CardBody>
     </Card>

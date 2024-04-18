@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Select, SelectItem } from '@nextui-org/react';
 import {
   CategoryIcon,
@@ -10,13 +10,21 @@ import {
   PriceRangeIcon,
 } from '../../utils/svgs.jsx';
 import FeaturedItemCard from './FeaturedItemCard.jsx';
-import useAlchemy from '../../hooks/useAlchemy.jsx';
+import useNft from '../../hooks/useNft';
 import SkeletonCard from './SkeletonCard.jsx';
 
 export default function DiscoverItem() {
   const [sort, setSort] = useState([]);
   const options = ['option 1', 'option 2', 'option 3', 'option 4', 'option 5', 'option 6'];
-  const { nfts } = useAlchemy(9, 17);
+  const [nfts, setNfts] = useState([]);
+  const { getAllNfts } = useNft({ start: 9, end: 17 });
+  const getNfts = async () => {
+    const response = await getAllNfts();
+    if (response) setNfts(response);
+  };
+  useEffect(() => {
+    getNfts();
+  }, []);
   return (
     <div className='max-w-[1100px] mx-auto mb-10'>
       <header className='flex justify-between'>

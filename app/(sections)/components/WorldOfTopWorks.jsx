@@ -1,10 +1,10 @@
 'use client';
 
 import { Button, Divider } from '@nextui-org/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { GoToIcon, SimpleArrow } from '../../utils/svgs.jsx';
-import useAlchemy from '../../hooks/useAlchemy.jsx';
+import useNft from '../../hooks/useNft';
 import WorldOfTopCard from './WOTCard.jsx';
 import Butterfly from '../../../public/Butterfly.png';
 import LittleBall from '../../../public/LittleBall.png';
@@ -14,7 +14,15 @@ import SkeletonCard from './SkeletonCard.jsx';
 
 export default function WorldOfTopWorks() {
   const [positionIndexes, setPositionIndexes] = useState([0, 1, 2, 3, 4, 5, 6]);
-  const { nfts } = useAlchemy(0, 7);
+  const [nfts, setNfts] = useState([]);
+  const { getAllNfts } = useNft({ start: 0, end: 7 });
+  const getNfts = async () => {
+    const response = await getAllNfts();
+    if (response) setNfts(response);
+  };
+  useEffect(() => {
+    getNfts();
+  }, []);
 
   const handleNext = () => {
     setPositionIndexes((prevIndexes) => {
@@ -67,7 +75,7 @@ export default function WorldOfTopWorks() {
         <div className='absolute top-44 right-0 2xl:-right-40'>
           <Image src={Sparkle} alt='Sparkle image' />
         </div>
-        <div className='absolute top-0 -right-56'>
+        <div className='hidden sm:absolute top-0 -right-56'>
           <Image src={LittleSparkle} alt='Little Sparkle image' />
         </div>
       </header>

@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import {
   Card,
   CardBody,
@@ -8,11 +9,19 @@ import {
 } from '@nextui-org/react';
 import Image from 'next/image';
 import { CollectionIcon, DiscoverMoreIcon, HeartFavouriteIcon } from '../../utils/svgs.jsx';
-import useAlchemy from '../../hooks/useAlchemy.jsx';
+import useNft from '../../hooks/useNft';
 import SkeletonCard from './SkeletonCard.jsx';
 
 export default function TopCollections() {
-  const { nfts } = useAlchemy(5, 8);
+  const [nfts, setNfts] = useState([]);
+  const { getAllNfts } = useNft({ start: 5, end: 8 });
+  const getNfts = async () => {
+    const response = await getAllNfts();
+    if (response) setNfts(response);
+  };
+  useEffect(() => {
+    getNfts();
+  }, []);
   return (
     <div className='max-w-[1100px] mx-auto mt-4'>
       <header className='flex flex-col sm:flex-row justify-between'>

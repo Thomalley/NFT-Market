@@ -1,18 +1,27 @@
 'use client';
 
 import { Button, Select, SelectItem } from '@nextui-org/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { SortBySelectIcon } from '../../../utils/svgs.jsx';
 import FeaturedItemCard from '../../../(sections)/components/FeaturedItemCard.jsx';
-import useAlchemy from '../../../hooks/useAlchemy.jsx';
+import useNft from '../../../hooks/useNft';
+import SkeletonCard from '../../../(sections)/components/SkeletonCard.jsx';
 
 export default function RecentlyAdded() {
   const buttonOptions = ['Category', 'Items', 'Status', 'Price Range'];
   const [isButtonSelected, setIsButtonSelected] = useState(1);
   const [sort, setSort] = useState([]);
   const options = ['option 1', 'option 2', 'option 3', 'option 4', 'option 5', 'option 6'];
-  const { nfts } = useAlchemy(17, 25);
 
+  const [nfts, setNfts] = useState([]);
+  const { getAllNfts } = useNft({ start: 17, end: 25 });
+  const getNfts = async () => {
+    const response = await getAllNfts();
+    if (response) setNfts(response);
+  };
+  useEffect(() => {
+    getNfts();
+  }, []);
   return (
     <>
       <header >
@@ -58,9 +67,20 @@ export default function RecentlyAdded() {
         </Select>
       </div>
       <div className='grid grid-cols-4 mt-8 gap-x-24 gap-4'>
-        {nfts.map((n, index) => (
+        {nfts.length ? (nfts.map((n, index) => (
           <FeaturedItemCard key={index} nft={n} />
-        ))}
+        ))) : (
+          <>
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+          </>
+        )}
       </div>
     </>
   );

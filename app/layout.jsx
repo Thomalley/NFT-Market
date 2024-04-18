@@ -1,4 +1,6 @@
 import './globals.css';
+// eslint-disable-next-line import/no-unresolved
+import { Toaster } from 'sonner';
 import Providers from './providers.jsx';
 
 export default function RootLayout({ children }) {
@@ -7,6 +9,7 @@ export default function RootLayout({ children }) {
       <body>
         <Providers>
             {children}
+            <Toaster richColors theme='dark'/>
         </Providers>
       </body>
     </html>

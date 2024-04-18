@@ -1,14 +1,26 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import {
   Avatar,
   Card,
   CardBody,
   CardHeader,
+  Skeleton,
 } from '@nextui-org/react';
 import Image from 'next/image';
-import useAlchemy from '../../../hooks/useAlchemy.jsx';
+import useNft from '../../../hooks/useNft';
 
 export default function ReacentlyAddedCard() {
-  const { nfts } = useAlchemy(14, 15);
+  const [nfts, setNfts] = useState([]);
+  const { getAllNfts } = useNft({ start: 14, end: 15 });
+  const getNfts = async () => {
+    const response = await getAllNfts();
+    if (response) setNfts(response);
+  };
+  useEffect(() => {
+    getNfts();
+  }, []);
   return (
     <Card className='w-[400px] h-[600px] bg-[#232323] p-3'>
       <CardHeader>
@@ -16,7 +28,14 @@ export default function ReacentlyAddedCard() {
       </CardHeader>
       <CardBody>
         <div>
-          <Image src={nfts[0]?.image?.cachedUrl} alt='nft image' width={360} height={200} className='w-[360px] h-[200px] object-cover rounded-t-[14px]' />
+          {!nfts[0]
+            ? (
+              <div>
+                <Skeleton className='w-[350px] h-[200px] rounded-t-[14px]' />
+              </div>
+            ) : (
+              <Image src={nfts[0]?.image?.cachedUrl} alt='nft image' width={360} height={200} className='w-[360px] h-[200px] object-cover rounded-t-[14px]' />
+            )}
           <div className='flex justify-between items-center bg-[#111111] w-full h-[50px] px-4 rounded-b-[14px]'>
             <h3 className='text-white font-bold text-base'>Photography</h3>
             <h3 className='text-white/50 text-sm'>16hr ago</h3>

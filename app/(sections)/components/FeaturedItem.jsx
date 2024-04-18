@@ -4,16 +4,24 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Button } from '@nextui-org/react';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import {
   DiscoverMoreIcon, PaginationArrowIcon, PaginationPlusIcon, PaginationYellowPlusIcon,
 } from '../../utils/svgs.jsx';
 import FeaturedItemCard from './FeaturedItemCard.jsx';
-import useAlchemy from '../../hooks/useAlchemy.jsx';
+import useNft from '../../hooks/useNft';
 import SkeletonCard from './SkeletonCard.jsx';
 
 export default function FeaturedItem() {
-  const { nfts } = useAlchemy(8, 15);
+  const [nfts, setNfts] = useState([]);
+  const { getAllNfts } = useNft({ start: 8, end: 15 });
+  const getNfts = async () => {
+    const response = await getAllNfts();
+    if (response) setNfts(response);
+  };
+  useEffect(() => {
+    getNfts();
+  }, []);
   const [currentSlide, setCurrentSlide] = useState(0);
   let sliderRef = useRef(null);
   const handleNextPage = () => {
@@ -106,26 +114,27 @@ export default function FeaturedItem() {
         </div>
       </header>
       <div className='flex flex-col gap-x-7 my-7'>
-        {nfts.length ? <Slider
-          ref={(slider) => {
-            sliderRef = slider;
-          }}
-          {...settings}
-          slidesToShow={4}
-        >
-          {nfts.map((nft) => (
-            <FeaturedItemCard nft={nft} key={nft.tokenId} />
-          ))}
-        </Slider>
-          : (
-            <div className='flex gap-x-7'>
-              <SkeletonCard />
-              <SkeletonCard />
-              <SkeletonCard />
-              <SkeletonCard />
-            </div>
-          )}
+        {nfts.length ? (
+          <Slider
+            ref={(slider) => {
+              sliderRef = slider;
+            }}
+            {...settings}
+            slidesToShow={4}
+          >
+            {nfts.map((nft) => (
+              <FeaturedItemCard nft={nft} key={nft.tokenId} />
+            ))}
+          </Slider>
+        ) : (
+          <div className='flex gap-x-7'>
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+          </div>
+        )}
       </div>
-    </div >
+    </div>
   );
 }

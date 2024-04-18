@@ -62,12 +62,13 @@ export default function Navbar() {
           {availableMenuPaths.map((value) => (
             <DropdownItem
               key={value.label}
+              textValue={value.label}
               onClick={() => router.push(value.href)}
             >
               {value.label}
             </DropdownItem>
           ))}
-          <DropdownItem>
+          <DropdownItem textValue='Connect wallet'>
             <Button isIconOnly radius='md' className='w-40 bg-main-color'>
               <span className='flex text-text-in-bg font-extrabold gap-1 text-sm'>
                 Wallet Connect

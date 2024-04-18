@@ -80,7 +80,7 @@ export default function TopSeller() {
         <Slider {...settings}>
           {cardInfo.map((c, index) => (
             <div key={index} className='text-center my-5'>
-              <Badge content={index + 1} size="lg">
+              <Badge content={index + 1} size="lg" className={`${[0, 1, 2].includes(index) && 'bg-main-color text-text-in-bg'} font-extrabold`}>
                 <Avatar size="lg" src={c.img} className="rounded-full h-20 w-20" />
               </Badge>
               <h2 className='font-extrabold text-lg'>{c.name}</h2>
