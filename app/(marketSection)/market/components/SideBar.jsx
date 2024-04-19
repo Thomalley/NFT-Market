@@ -20,6 +20,7 @@ import MarketSectionActiveBidIcon from '../../../utils/MarketSectionActiveBidIco
 import MarketSectionMyCollectionIcon from '../../../utils/MarketSectionMyCollectionIcon.png';
 import MarketSectionWalletIcon from '../../../utils/MarketSectionWalletIcon.png';
 import {
+  ItemsIcon,
   MarketSectionCreateIcon,
   MarketSectionExploreIcon,
   MarketSectionFavouriteIcon,
@@ -105,10 +106,15 @@ export default function SideBar() {
             <Button className='ml-7 bg-light text-text-in-bg w-[220px] h-[44px] font-extrabold text-sm'>Create {MarketSectionCreateIcon}</Button>
           </DropdownItem>
           <DropdownItem
+            textValue='Market'
+          >
+            <h4 className='flex gap-3 font-medium text-base text-main-color'>{MarketSectionMarketIcon} Market</h4>
+          </DropdownItem>
+          <DropdownItem
             textValue='Home'
           >
             <Link href="/" prefetch={true}>
-              <h4 className='flex gap-3 font-medium text-base text-main-color'>{MarketSectionMarketIcon} Home</h4>
+              <h4 className='flex gap-3 font-medium text-base'>{ItemsIcon} Home</h4>
             </Link>
           </DropdownItem>
           <DropdownItem

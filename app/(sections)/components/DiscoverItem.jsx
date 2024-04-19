@@ -15,6 +15,10 @@ import SkeletonCard from './SkeletonCard.jsx';
 
 export default function DiscoverItem() {
   const [sort, setSort] = useState([]);
+  const [sort2, setSort2] = useState([]);
+  const [sort3, setSort3] = useState([]);
+  const [sort4, setSort4] = useState([]);
+  const [sort5, setSort5] = useState([]);
   const options = ['option 1', 'option 2', 'option 3', 'option 4', 'option 5', 'option 6'];
   const [nfts, setNfts] = useState([]);
   const { getAllNfts } = useNft({ start: 19, end: 27 });
@@ -62,10 +66,10 @@ export default function DiscoverItem() {
           selectionMode="single"
           placeholder="Items"
           startContent={ItemsIcon}
-          selectedKeys={sort}
+          selectedKeys={sort2}
           aria-label="sort select"
           className="w-full sm:w-48"
-          onSelectionChange={setSort}
+          onSelectionChange={setSort2}
           classNames={{
             trigger:
               'bg-black border-1 border-Beige data-[hover=true]:bg-[:#FCFBF9] data-[hover=true]:cursor-pointer',
@@ -85,10 +89,10 @@ export default function DiscoverItem() {
           selectionMode="single"
           placeholder="Status"
           startContent={StatusIcon}
-          selectedKeys={sort}
+          selectedKeys={sort3}
           aria-label="sort select"
           className="w-full sm:w-48"
-          onSelectionChange={setSort}
+          onSelectionChange={setSort3}
           classNames={{
             trigger:
               'bg-black border-1 border-Beige data-[hover=true]:bg-[:#FCFBF9] data-[hover=true]:cursor-pointer',
@@ -108,10 +112,10 @@ export default function DiscoverItem() {
           selectionMode="single"
           placeholder="Prince Range"
           startContent={PriceRangeIcon}
-          selectedKeys={sort}
+          selectedKeys={sort4}
           aria-label="sort select"
           className="w-full sm:w-48"
-          onSelectionChange={setSort}
+          onSelectionChange={setSort4}
           classNames={{
             trigger:
               'bg-black border-1 border-Beige data-[hover=true]:bg-[:#FCFBF9] data-[hover=true]:cursor-pointer',
@@ -131,10 +135,10 @@ export default function DiscoverItem() {
           selectionMode="single"
           placeholder="Sort By: Recently Added"
           startContent={PriceRangeIcon}
-          selectedKeys={sort}
+          selectedKeys={sort5}
           aria-label="sort select"
           className="w-full sm:w-64"
-          onSelectionChange={setSort}
+          onSelectionChange={setSort5}
           classNames={{
             trigger:
               'bg-black border-1 border-Beige data-[hover=true]:bg-[:#FCFBF9] data-[hover=true]:cursor-pointer',

@@ -4,7 +4,7 @@ const useNft = ({ tokenId, start = 0, end = 10 }) => {
   const alchemy = new Alchemy();
   const contractAddress = '0xe785E82358879F061BC3dcAC6f0444462D4b5330';
   const options = {
-    apiKey: 'sf1AYSLaVV-D7uF9VzmHfxFLbLGZgu7X',
+    apiKey: process.env.ALCHEMY_API_KEY,
     network: Network.ETH_MAINNET,
   };
 
