@@ -3,7 +3,7 @@ import { Card, CardBody, CardHeader } from '@nextui-org/react';
 export default function TrendringCoinsCard() {
   const coins = ['Bitcoin', 'Ethereum', 'Cardano', 'Solana', 'Litecoin'];
   return (
-    <Card className='w-[400px] h-[345px] bg-[#232323] p-3'>
+    <Card className='sm:w-[400px] h-[345px] bg-[#232323] p-3'>
       <CardHeader>
         <h2 className='font-extrabold text-[22px]'>Trending coins</h2>
       </CardHeader>

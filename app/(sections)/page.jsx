@@ -8,7 +8,7 @@ import TopCollectors from './components/TopCollectors.jsx';
 
 export default function Home() {
   return (
-    <div className="">
+    <div>
       <WorldOfTopWorks />
       <FeaturedItem />
       <TopSeller />

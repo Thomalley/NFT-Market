@@ -110,12 +110,12 @@ export default function TrendingNfts() {
   };
 
   return (
-    <div className='max-w-[1100px] -mr-20'>
+    <div className='sm:max-w-[1100px] mb-10 sm:-mr-20'>
       <header >
         <h1 className="text-[32px] font-extrabold">Trending NFTs</h1>
       </header>
-      <div className="flex justify-between mt-6">
-        <div className='space-x-2'>
+      <div className="flex flex-col sm:flex-row sm:justify-between space-y-4 sm:space-y-0 mt-6">
+        <div className='flex flex-col sm:flex-row gap-x-3 gap-4 sm:gap-0'>
           {buttonOptions.map((o, index) => (
             <Button
               variant="ghost"
@@ -135,7 +135,7 @@ export default function TrendingNfts() {
           startContent={SortBySelectIcon}
           selectedKeys={sort}
           aria-label="sort select"
-          className="w-64"
+          className="w-full sm:w-64"
           onSelectionChange={setSort}
           classNames={{
             trigger:
@@ -167,12 +167,17 @@ export default function TrendingNfts() {
             ))}
           </Slider>
         ) : (
-          <div className='flex gap-x-7'>
-            <SkeletonCard />
-            <SkeletonCard />
-            <SkeletonCard />
-            <SkeletonCard />
-          </div>
+          <>
+            <div className='hidden sm:flex gap-x-7'>
+              <SkeletonCard />
+              <SkeletonCard />
+              <SkeletonCard />
+              <SkeletonCard />
+            </div>
+            <div className='flex sm:hidden'>
+              <SkeletonCard />
+            </div>
+          </>
         )}
       </div>
     </div>

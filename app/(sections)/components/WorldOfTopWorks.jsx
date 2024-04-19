@@ -53,7 +53,7 @@ export default function WorldOfTopWorks() {
   };
 
   return (
-    <div className="bg-[url('/Bg.png')] flex flex-col items-center h-fit bg-center -mt-20">
+    <div className="bg-[url('/Bg.png')] flex flex-col items-center h-fit bg-center -mt-20 shadow-none">
       <header className='relative text-center mt-40'>
         <div className='absolute top-32 left-20 sm:top-44 2xl:-left-40'>
           <Image src={LittleBall} alt='Litle ball image' />

@@ -69,7 +69,7 @@ export default function Footer() {
           </div>
         </div>
         <Divider className='mt-14 mb-6' />
-        <div className='flex flex-col sm:flex-row justify-between font-AzeretMono'>
+        <div className='flex flex-col sm:flex-row text-center justify-between font-AzeretMono'>
           <h4 className='text-white/55 font-normal text-sm'>© 2023 OpeN9 - Made By Themesflat</h4>
           <div className='flex flex-col sm:flex-row gap-6'>
             <h4 className='text-white/55 font-normal text-sm'>Privacy Policy</h4>

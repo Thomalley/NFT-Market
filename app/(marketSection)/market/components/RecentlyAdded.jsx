@@ -14,7 +14,7 @@ export default function RecentlyAdded() {
   const options = ['option 1', 'option 2', 'option 3', 'option 4', 'option 5', 'option 6'];
 
   const [nfts, setNfts] = useState([]);
-  const { getAllNfts } = useNft({ start: 17, end: 25 });
+  const { getAllNfts } = useNft({ start: 25, end: 33 });
   const getNfts = async () => {
     const response = await getAllNfts();
     if (response) setNfts(response);
@@ -23,12 +23,12 @@ export default function RecentlyAdded() {
     getNfts();
   }, []);
   return (
-    <>
+    <div className='sm:max-w-[1100px] mb-10 pt-10 '>
       <header >
         <h1 className="text-[32px] font-extrabold">Recently Added</h1>
       </header>
-      <div className="flex justify-between mt-6 -mr-20">
-        <div className='space-x-2'>
+      <div className="flex flex-col sm:flex-row sm:justify-between space-y-4 sm:space-y-0 mt-6">
+        <div className='flex flex-col sm:flex-row gap-x-3 gap-4 sm:gap-0'>
           {buttonOptions.map((o, index) => (
             <Button
               variant="ghost"
@@ -48,7 +48,7 @@ export default function RecentlyAdded() {
           startContent={SortBySelectIcon}
           selectedKeys={sort}
           aria-label="sort select"
-          className="w-64"
+          className="w-full sm:w-64 -mr-20"
           onSelectionChange={setSort}
           classNames={{
             trigger:
@@ -66,7 +66,7 @@ export default function RecentlyAdded() {
           ))}
         </Select>
       </div>
-      <div className='grid grid-cols-4 mt-8 gap-x-24 gap-4'>
+      <div className='hidden sm:grid grid-cols-4 mt-8 gap-x-24 gap-4'>
         {nfts.length ? (nfts.map((n, index) => (
           <FeaturedItemCard key={index} nft={n} />
         ))) : (
@@ -82,6 +82,16 @@ export default function RecentlyAdded() {
           </>
         )}
       </div>
-    </>
+      <div className='sm:hidden grid grid-cols-1 mt-8 gap-7'>
+        {nfts.length ? nfts.slice(0, 2).map((n, index) => (
+          <FeaturedItemCard key={index} nft={n} />
+        )) : (
+          <>
+            <SkeletonCard />
+            <SkeletonCard />
+          </>
+        )}
+      </div>
+    </div>
   );
 }

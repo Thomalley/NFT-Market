@@ -11,6 +11,7 @@ import {
   CardBody,
   CardHeader,
   Divider,
+  Skeleton,
   Tooltip,
 } from '@nextui-org/react';
 import useNft from '../../../hooks/useNft';
@@ -35,37 +36,49 @@ import Offers from '../components/Offers.jsx';
 import ItemActivity from '../components/ItemActivity.jsx';
 
 export default function ProductDetail({ params }) {
+  const [truncString, setTruncString] = useState(true);
   const [metadata, setMetadata] = useState({});
+  const [description, setDescription] = useState('Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque libero velit, saepe itaque repellendus nesciunt quas facilis id veniam excepturi voluptatum dicta modi numquam ullam sit quos minima tempora quae?');
+
   const { getNftDetails } = useNft({ tokenId: BigInt(params?.id) });
   const getMetadata = async () => {
     const response = await getNftDetails();
-    if (response) setMetadata(response);
+    if (response) {
+      setMetadata(response);
+      if (response.contract.openSeaMetadata.description) {
+        setDescription(response.contract.openSeaMetadata.description);
+      }
+    }
   };
 
   useEffect(() => {
     getMetadata();
   }, [params]);
 
-  if (!metadata.tokenId) return <h1>No metadata tokenid</h1>;
   return (
-    <div className="max-w-[1090px] mx-auto grid grid-cols-4 justify-center mt-10 gap-3">
-      <div className='relative col-span-2 sm:h-[903px]'>
-        <Image
+    <div className="px-3 sm:px-0 sm:max-w-[1090px] mx-auto sm:grid sm:grid-cols-4 justify-center mt-10 gap-3">
+      <div className='relative sm:col-span-2 sm:h-[903px]'>
+        {metadata?.tokenId ? <Image
           src={metadata?.image?.cachedUrl}
           alt='nft image'
           priority
           width={540}
           height={903}
           className='sm:h-[903px] sm:w-[540px] object-cover rounded-[20px]'
-        />
-        <div className='absolute flex justify-center items-center w-[158px] h-[52px] rounded-full bg-[#585858] font-extrabold text-xl bottom-3 right-48'>2h 4m 32s</div>
+        /> : (
+          <Skeleton className='rounded-lg'>
+            <div className='h-[903px] w-[540px]'>
+            </div>
+          </Skeleton>
+        )}
+        <div className='absolute flex justify-center items-center w-[158px] h-[52px] rounded-full bg-[#585858] font-extrabold text-xl bottom-3 right-[29%] sm:right-48'>2h 4m 32s</div>
         <div className='absolute flex justify-center items-center w-[52px] h-[26px] rounded-full bg-[#585858] font-extrabold text-xs top-4 right-5 gap-1'>10 {HeartWhiteIcon}</div>
         <div className='absolute flex justify-center items-center size-[26px] rounded-full bg-[#585858] top-4 right-20'>{EthIcon}</div>
       </div>
-      <div className='w-full col-span-2 '>
+      <div className='w-full sm:col-span-2 mt-5 sm:mt-0'>
         <div className='flex justify-between'>
           <div className='flex gap-2'>
-            <h4 className='text-main-color font-extrabold text-sm'>{metadata?.collection?.name}</h4>
+            <h4 className='text-main-color font-extrabold text-sm ml-2'>{metadata?.collection?.name || 'World of Women'}</h4>
             {YellowVerifiedIcon}
           </div>
           <div className='flex gap-3'>
@@ -73,8 +86,8 @@ export default function ProductDetail({ params }) {
             {ThreeDotsIcon}
           </div>
         </div>
-        <h2 className='font-extrabold text-[32px]'>{metadata?.raw?.metadata?.name}</h2>
-        <div className='flex items-center gap-3'>
+        <h2 className='font-extrabold text-[32px] ml-2 h-12'>{metadata?.raw?.metadata?.name}</h2>
+        <div className='flex items-center gap-3 ml-2'>
           <Avatar
             src='https://i.pravatar.cc/140'
             className="w-fit mt-2"
@@ -84,18 +97,18 @@ export default function ProductDetail({ params }) {
             <h3 className='font-AzeretMono font-normal text-xs'>Marvin McKinney</h3>
           </div>
         </div>
-        <div className='flex mt-8 gap-3'>
-          <div className='flex justify-center items-center gap-2 border-1 border-white/10 w-[111px] h-[39px] rounded-xl font-extrabold text-sm'>
+        <div className='flex mt-8 gap-3 ml-2'>
+          <div className='flex justify-center items-center gap-2 border-1 border-white/10 w-[111px] h-[39px] rounded-xl font-extrabold text-xs sm:text-sm'>
             {ViewsIcon}208 View
           </div>
-          <div className='flex justify-center items-center gap-2 border-1 border-white/10 w-[162px] h-[39px] rounded-xl font-extrabold text-sm'>
+          <div className='flex justify-center items-center gap-2 border-1 border-white/10 w-[162px] h-[39px] rounded-xl font-extrabold text-xs sm:text-sm'>
             {TopTrendingIcon}Top #2 Trending
           </div>
-          <div className='flex justify-center items-center gap-2 border-1 border-white/10 w-[130px] h-[39px] rounded-xl font-extrabold text-sm'>
+          <div className='flex justify-center items-center gap-2 border-1 border-white/10 w-[130px] h-[39px] rounded-xl font-extrabold text-xs sm:text-sm'>
             {HeartWhiteIcon}Favourites
           </div>
         </div>
-        <Card className='shadow-none sm:w-[522px] ml-2 sm:h-[155px] rounded-[20px] mt-6 bg-[#232323]'>
+        <Card className='shadow-none sm:w-[522px] ml-2 sm:h-[165px] rounded-[20px] mt-6 bg-[#232323]'>
           <CardHeader className='flex flex-col items-start p-4'>
             <div className='flex justify-center items-center gap-2 font-extrabold text-sm mb-4'>
               {TimerIcon}Sale ends May 22 at 9:39
@@ -105,13 +118,13 @@ export default function ProductDetail({ params }) {
           <CardBody className='-mt-1'>
             <h4 className='font-AzeretMono opacity-30 text-xs font-normal tracking-wider'>current price</h4>
             <div className='flex justify-between'>
-              <div className='flex items-baseline gap-2'>
+              <div className='flex flex-col sm:flex-row items-baseline gap-2'>
                 <h1 className='font-extrabold text-[32px]'>
                   {nftEthereumPriceFormatter(metadata?.contract?.openSeaMetadata?.floorPrice)} ETH
                 </h1>
                 <h4 className='font-AzeretMono opacity-30 text-xs font-normal tracking-wider'>${nftUsdPriceFormatter(metadata?.contract?.openSeaMetadata?.floorPrice)}</h4>
               </div>
-              <Button className='bg-main-color font-extrabold text-sm text-text-in-bg h-[50px] w-[216px]'>Place A Bid {GoToIcon}</Button>
+              <Button className='bg-main-color font-extrabold text-sm text-text-in-bg h-[50px] w-[170px] sm:w-[216px]'>Place A Bid {GoToIcon}</Button>
             </div>
           </CardBody>
         </Card>
@@ -130,17 +143,17 @@ export default function ProductDetail({ params }) {
             aria-label='Accordion Description'
             startContent={<DescriptionIcon />}
             title='Description'
-            className='my-4 group-[.is-splitted]:px-0'
+            className='mt-4 group-[.is-splitted]:px-0'
           >
             <Divider className='mb-4' />
-            <Card className='shadow-none w-full sm:h-[76px] rounded-[20px] mt-6 bg-[#232323] px-2'>
+            <Card className='shadow-none w-full max-h-[100px] sm:h-[80px] rounded-[20px] mt-6 bg-[#232323] px-2'>
               <CardBody className='-mt-3'>
                 <div className='font-AzeretMono font-normal text-sm'>
-                  <p className='text-white/50 truncate'>
-                    {metadata?.contract?.openSeaMetadata?.description}
+                  <p className={`${truncString && 'line-clamp-2'} text-white/50`}>
+                    {description}
                   </p>
-                  <span className='ml-2 text-main-color cursor-pointer'>
-                    see more
+                  <span className='text-main-color cursor-pointer' onClick={() => setTruncString((prev) => !prev)}>
+                    {`see ${truncString ? 'more' : 'less'}`}
                   </span>
                 </div>
               </CardBody>
@@ -162,7 +175,7 @@ export default function ProductDetail({ params }) {
             aria-label='Accordion Chart'
             startContent={<DescriptionIcon />}
             title='Price History'
-            className='mt-4 group-[.is-splitted]:px-0'
+            className='sm:mt-4 group-[.is-splitted]:px-0'
           >
             <Divider className='mb-4' />
             <Tooltip
@@ -183,10 +196,11 @@ export default function ProductDetail({ params }) {
           </AccordionItem>
         </Accordion>
       </div>
-      <div className='w-full col-span-4'>
+      {metadata?.tokenId && <div className='w-full sm:col-span-4 space-y-3 sm:space-y-0 mt-5 sm:mt-0'>
         <Accordion
           defaultExpandedKeys={['1']}
           variant='splitted'
+          className=''
           itemClasses={{
             title: 'text-white font-extrabold text-lg',
             indicator: 'text-white',
@@ -268,7 +282,7 @@ export default function ProductDetail({ params }) {
             <ItemActivity />
           </AccordionItem>
         </Accordion>
-      </div>
-    </div>
+      </div>}
+    </div >
   );
 }

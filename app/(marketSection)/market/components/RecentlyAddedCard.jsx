@@ -21,8 +21,9 @@ export default function ReacentlyAddedCard() {
   useEffect(() => {
     getNfts();
   }, []);
+  console.log(nfts);
   return (
-    <Card className='w-[400px] h-[600px] bg-[#232323] p-3'>
+    <Card className='sm:w-[400px] h-[600px] bg-[#232323] p-3'>
       <CardHeader>
         <h2 className='font-extrabold text-[22px]'>Recently added</h2>
       </CardHeader>
@@ -34,7 +35,7 @@ export default function ReacentlyAddedCard() {
                 <Skeleton className='w-[350px] h-[200px] rounded-t-[14px]' />
               </div>
             ) : (
-              <Image src={nfts[0]?.image?.cachedUrl} alt='nft image' width={360} height={200} className='w-[360px] h-[200px] object-cover rounded-t-[14px]' />
+              <Image src={nfts[0]?.image?.originalUrl} alt='nft image' width={360} height={200} className='w-[360px] h-[200px] object-cover rounded-t-[14px]' />
             )}
           <div className='flex justify-between items-center bg-[#111111] w-full h-[50px] px-4 rounded-b-[14px]'>
             <h3 className='text-white font-bold text-base'>Photography</h3>

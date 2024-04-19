@@ -4,6 +4,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Button } from '@nextui-org/react';
+import Link from 'next/link';
 import { useRef, useState, useEffect } from 'react';
 import {
   DiscoverMoreIcon, PaginationArrowIcon, PaginationPlusIcon, PaginationYellowPlusIcon,
@@ -36,6 +37,7 @@ export default function FeaturedItem() {
     speed: 500,
     slidesToScroll: 1,
     swipeToSlide: true,
+    className: 'sm:-mr-7',
     arrows: false,
     responsive: [
       {
@@ -105,7 +107,7 @@ export default function FeaturedItem() {
   };
 
   return (
-    <div className='max-w-[1100px] mx-auto' >
+    <div className='max-w-[1090px] mx-auto' >
       <header className='flex justify-between'>
         <h1 className="text-[32px] font-extrabold">Featured Item</h1>
         <div className='flex items-center gap-x-2 cursor-pointer hover:gap-x-4 transform duration-500'>
@@ -113,7 +115,8 @@ export default function FeaturedItem() {
           {DiscoverMoreIcon}
         </div>
       </header>
-      <div className='flex flex-col gap-x-7 my-7'>
+      {/* el gap de aca abajo no esta funcionando */}
+      <div className='flex flex-col gap-7 my-7'>
         {nfts.length ? (
           <Slider
             ref={(slider) => {
@@ -121,18 +124,26 @@ export default function FeaturedItem() {
             }}
             {...settings}
             slidesToShow={4}
+            className=''
           >
             {nfts.map((nft) => (
-              <FeaturedItemCard nft={nft} key={nft.tokenId} />
+              <Link key={nft.tokenId} href={`/productDetail/${nft.tokenId}`}>
+                <FeaturedItemCard nft={nft} />
+              </Link>
             ))}
           </Slider>
         ) : (
-          <div className='flex gap-x-7'>
-            <SkeletonCard />
-            <SkeletonCard />
-            <SkeletonCard />
-            <SkeletonCard />
-          </div>
+          <>
+            <div className='hidden sm:flex gap-x-7'>
+              <SkeletonCard />
+              <SkeletonCard />
+              <SkeletonCard />
+              <SkeletonCard />
+            </div>
+            <div className='flex sm:hidden'>
+              <SkeletonCard />
+            </div>
+          </>
         )}
       </div>
     </div>
