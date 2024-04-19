@@ -26,7 +26,7 @@ export default function DiscoverItem() {
     getNfts();
   }, []);
   return (
-    <div className='max-w-[1100px] mx-auto mb-10'>
+    <div className='max-w-[1100px] mx-auto mb-10 px-2 sm:px-0'>
       <header className='flex justify-between'>
         <h1 className="text-[32px] font-extrabold">Discover Item</h1>
         <div className='flex items-center gap-x-2 cursor-pointer hover:gap-x-4 transform duration-500'>

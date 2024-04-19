@@ -107,7 +107,7 @@ export default function FeaturedItem() {
   };
 
   return (
-    <div className='max-w-[1090px] mx-auto' >
+    <div className='max-w-[1090px] mx-auto px-2 sm:px-0'>
       <header className='flex justify-between'>
         <h1 className="text-[32px] font-extrabold">Featured Item</h1>
         <div className='flex items-center gap-x-2 cursor-pointer hover:gap-x-4 transform duration-500'>
@@ -115,7 +115,6 @@ export default function FeaturedItem() {
           {DiscoverMoreIcon}
         </div>
       </header>
-      {/* el gap de aca abajo no esta funcionando */}
       <div className='flex flex-col gap-7 my-7'>
         {nfts.length ? (
           <Slider
@@ -127,7 +126,7 @@ export default function FeaturedItem() {
             className=''
           >
             {nfts.map((nft) => (
-              <Link key={nft.tokenId} href={`/productDetail/${nft.tokenId}`}>
+              <Link key={nft.tokenId} prefetch={true} href={`/productDetail/${nft.tokenId}`}>
                 <FeaturedItemCard nft={nft} />
               </Link>
             ))}

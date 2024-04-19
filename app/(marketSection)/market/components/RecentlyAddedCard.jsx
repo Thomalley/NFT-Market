@@ -22,7 +22,7 @@ export default function ReacentlyAddedCard() {
     getNfts();
   }, []);
   return (
-    <Card className='sm:w-[400px] lg:w-[250px] 2xl:w-[400px] h-[600px] bg-[#232323] p-3'>
+    <Card className='sm:w-[400px] lg:w-[250px] 2xl:w-[400px] h-[600px] bg-[#232323] p-3 m-3 sm:m-0'>
       <CardHeader>
         <h2 className='font-extrabold text-[22px]'>Recently added</h2>
       </CardHeader>

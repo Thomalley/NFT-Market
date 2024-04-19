@@ -6,7 +6,7 @@ import { userStore } from '../../../stores/userStore';
 export default function MarketHeader() {
   const storedUser = userStore((s) => s.user);
   return (
-    <nav className='mt-10 flex flex-col sm:flex-row justify-center sm:justify-between px-2'>
+    <nav className='mt-10 flex flex-col sm:flex-row justify-center sm:justify-between px-3'>
       <Input
         type="text"
         placeholder="Search artwork, collection..."

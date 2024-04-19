@@ -4,6 +4,7 @@ import { Button, Select, SelectItem } from '@nextui-org/react';
 import { useEffect, useRef, useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
+import Link from 'next/link';
 import 'slick-carousel/slick/slick-theme.css';
 import {
   PaginationArrowIcon, PaginationPlusIcon, PaginationYellowPlusIcon, SortBySelectIcon,
@@ -113,7 +114,7 @@ export default function TrendingNfts() {
   };
 
   return (
-    <div className='sm:max-w-[1100px] mb-10 sm:-mr-20'>
+    <div className='sm:max-w-[1100px] mb-10 sm:-mr-20 px-3 sm:px-3'>
       <header >
         <h1 className="text-[32px] font-extrabold">Trending NFTs</h1>
       </header>
@@ -166,7 +167,9 @@ export default function TrendingNfts() {
             slidesToShow={4}
           >
             {nfts.map((n, index) => (
-              <TrendingNftsCard key={index} nft={n} />
+              <Link key={n.tokenId} prefetch={true} href={`/productDetail/${n.tokenId}`}>
+                <TrendingNftsCard key={index} nft={n} />
+              </Link>
             ))}
           </Slider>
         ) : (

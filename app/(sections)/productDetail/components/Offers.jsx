@@ -8,8 +8,8 @@ import { EthIcon } from '../../../utils/svgs.jsx';
 export default function Offers() {
   return (
     <>
-      <Card className='shadow-none w-full h-[319px] rounded-[20px] mt-6 bg-[#232323] px-2'>
-        <CardBody className='flex flex-col px-4 -mt-6 sm:overflow-hidden font-AzeretMono'>
+      <Card className='shadow-none w-full h-[360px] sm:h-[319px] rounded-[20px] mt-6 bg-[#232323] px-2'>
+        <CardBody className='flex flex-col px-4 -mt-6 overflow-hidden font-AzeretMono'>
           <Divider className=' bg-white/5 w-full sm:w-[1050px] flex self-center' />
           <div className='flex justify-around text-center sm:text-start h-full items-center -mb-5 font-Manrope'>
             <h2 className='font-extrabold text-sm h-9 w-full'>Price</h2>

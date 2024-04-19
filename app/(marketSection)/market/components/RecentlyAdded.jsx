@@ -2,6 +2,7 @@
 
 import { Button, Select, SelectItem } from '@nextui-org/react';
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { SortBySelectIcon } from '../../../utils/svgs.jsx';
 import FeaturedItemCard from '../../../(sections)/components/FeaturedItemCard.jsx';
 import useNft from '../../../hooks/useNft';
@@ -23,7 +24,7 @@ export default function RecentlyAdded() {
     getNfts();
   }, []);
   return (
-    <div className='sm:max-w-[1100px] mb-10 pt-10 '>
+    <div className='sm:max-w-[1100px] mb-10 pt-10 px-3 sm:px-0'>
       <header >
         <h1 className="text-[32px] font-extrabold">Recently Added</h1>
       </header>
@@ -68,7 +69,9 @@ export default function RecentlyAdded() {
       </div>
       <div className='hidden sm:grid grid-cols-4 mt-8 gap-x-24 gap-4'>
         {nfts.length ? (nfts.map((n, index) => (
-          <FeaturedItemCard key={index} nft={n} />
+          <Link key={n.tokenId} prefetch={true} href={`/productDetail/${n.tokenId}`}>
+            <FeaturedItemCard key={index} nft={n} />
+          </Link>
         ))) : (
           <>
             <SkeletonCard />
@@ -84,7 +87,9 @@ export default function RecentlyAdded() {
       </div>
       <div className='sm:hidden grid grid-cols-1 mt-8 gap-7'>
         {nfts.length ? nfts.slice(0, 2).map((n, index) => (
-          <FeaturedItemCard key={index} nft={n} />
+          <Link key={n.tokenId} prefetch={true} href={`/productDetail/${n.tokenId}`}>
+            <FeaturedItemCard key={index} nft={n} />
+          </Link>
         )) : (
           <>
             <SkeletonCard />
@@ -92,6 +97,6 @@ export default function RecentlyAdded() {
           </>
         )}
       </div>
-    </div>
+    </div >
   );
 }

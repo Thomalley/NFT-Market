@@ -3,6 +3,7 @@
 import { Button, Divider } from '@nextui-org/react';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { GoToIcon, SimpleArrow } from '../../utils/svgs.jsx';
 import useNft from '../../hooks/useNft';
 import WorldOfTopCard from './WOTCard.jsx';
@@ -53,7 +54,7 @@ export default function WorldOfTopWorks() {
   };
 
   return (
-    <div className="bg-[url('/Bg.png')] flex flex-col items-center h-fit bg-center -mt-20 shadow-none">
+    <div className="bg-[url('/Bg.png')] flex flex-col items-center h-fit bg-center -mt-20 shadow-none px-1 sm:px-0">
       <header className='relative text-center mt-40'>
         <div className='absolute top-32 left-20 sm:top-44 2xl:-left-40'>
           <Image src={LittleBall} alt='Litle ball image' />
@@ -99,36 +100,38 @@ export default function WorldOfTopWorks() {
           <section
             key={nft.tokenId}
           >
-            <WorldOfTopCard
-              nft={nft}
-              positionIndexes={positionIndexes}
-              index={index}
-              xVariant={['-45%', '-72%', '-95%', '95%', '70%', '40%']}
-              containerClassName='hidden lg:block'
-              motionDivWidth='30%'
-              leftPosition='35%'
-              topPosition={0}
-            />
-            <WorldOfTopCard
-              nft={nft}
-              positionIndexes={positionIndexes}
-              index={index}
-              xVariant={['-72%', '-72%', '-95%', '90%', '70%', '70%']}
-              containerClassName='hidden sm:block lg:hidden'
-              motionDivWidth='30%'
-              leftPosition='35%'
-              topPosition='2%'
-            />
-            <WorldOfTopCard
-              nft={nft}
-              positionIndexes={positionIndexes}
-              index={index}
-              xVariant={['0%', '0%', '0%', '0%', '0%', '0%']}
-              containerClassName='block sm:hidden'
-              motionDivWidth='50%'
-              leftPosition='25%'
-              topPosition='15%'
-            />
+            <Link key={nft.tokenId} prefetch={true} href={`/productDetail/${nft.tokenId}`}>
+              <WorldOfTopCard
+                nft={nft}
+                positionIndexes={positionIndexes}
+                index={index}
+                xVariant={['-45%', '-72%', '-95%', '95%', '70%', '40%']}
+                containerClassName='hidden lg:block'
+                motionDivWidth='30%'
+                leftPosition='35%'
+                topPosition={0}
+              />
+              <WorldOfTopCard
+                nft={nft}
+                positionIndexes={positionIndexes}
+                index={index}
+                xVariant={['-72%', '-72%', '-95%', '90%', '70%', '70%']}
+                containerClassName='hidden sm:block lg:hidden'
+                motionDivWidth='30%'
+                leftPosition='35%'
+                topPosition='2%'
+              />
+              <WorldOfTopCard
+                nft={nft}
+                positionIndexes={positionIndexes}
+                index={index}
+                xVariant={['0%', '0%', '0%', '0%', '0%', '0%']}
+                containerClassName='block sm:hidden'
+                motionDivWidth='50%'
+                leftPosition='25%'
+                topPosition='15%'
+              />
+            </Link>
           </section>
         ))) : (
           <SkeletonCard />

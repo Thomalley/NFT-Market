@@ -17,7 +17,7 @@ export default function TopCreatorsCard() {
   }, []);
 
   return (
-    <Card className='sm:w-[400px] h-[480px] bg-[#232323] p-3'>
+    <Card className='sm:w-[400px] h-full sm:h-[480px] bg-[#232323] p-3 m-3 sm:m-0'>
       <CardHeader className='flex justify-between'>
         <h2 className='font-extrabold text-[22px]'>Top Creators</h2>
         <h4 className='text-sm font-medium'>See all</h4>

@@ -5,14 +5,15 @@ import {
   Button,
   Avatar,
   Image,
+  Tooltip,
 } from '@nextui-org/react';
 import { HeartFavouriteIcon, EthIcon } from '../../../utils/svgs.jsx';
 import { nftEthereumPriceFormatter } from '../../../utils/functions';
 
 export default function TrendingNftsCard({ nft }) {
   return (
-    <>
-      <Card className="p-1 w-[255px] h-[425px] rounded-[20px] bg-[#232323] mx-auto lg:mx-0 shadow-none">
+    <Tooltip content="See more" className='hidden sm:block'>
+      <Card className="p-1 w-[255px] h-[425px] rounded-[20px] bg-[#232323] mx-auto shadow-none sm:hover:scale-[1.01] cursor-pointer transform duration-300">
         <CardHeader className='py-1'>
           <div className='flex items-center gap-3'>
             <Avatar
@@ -46,6 +47,6 @@ export default function TrendingNftsCard({ nft }) {
           </span>
         </CardBody>
       </Card>
-    </>
+    </Tooltip>
   );
 }

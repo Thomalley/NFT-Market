@@ -9,8 +9,8 @@ import { nftEthereumPriceFormatter } from '../../utils/functions';
 
 export default function FeaturedItemCard({ nft }) {
   return (
-    <Tooltip content="See more">
-      <Card className="p-1 w-64 h-100 rounded-[20px] bg-[#232323] mx-auto lg:mx-0 shadow-none hover:scale-[1.01] cursor-pointer transform duration-300">
+    <Tooltip content="See more" className='hidden sm:block'>
+      <Card className="p-1 w-64 h-100 rounded-[20px] bg-[#232323] mx-auto shadow-none sm:hover:scale-[1.01] cursor-pointer transform duration-300">
         <CardHeader className="relative pb-0 pt-2 px-2 flex-col items-center">
           <Button isIconOnly radius='full' className='absolute bg-transparent right-3 top-2 z-50'>{HeartFavouriteIcon}</Button>
           <Image

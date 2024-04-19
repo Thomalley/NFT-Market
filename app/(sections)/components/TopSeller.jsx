@@ -70,7 +70,7 @@ export default function TopSeller() {
     prevArrow: <PrevArrow />,
   };
   return (
-    <div className='max-w-[1100px] mx-auto mt-14 mb-14'>
+    <div className='max-w-[1100px] mx-auto my-14 px-2 sm:px-0 mt-20 sm:mt-0'>
       <header className='flex items-center '>
         <h1 className="text-[32px] font-extrabold mr-3">Top Sellers in</h1>
         <h1 className="text-[32px] font-extrabold mr-3 text-main-color">1 day</h1>
