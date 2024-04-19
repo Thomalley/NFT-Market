@@ -70,7 +70,7 @@ export default function TopCollections() {
           </div>
         )}
       </div>
-      <div className="flex sm:hidden mt-8">
+      <div className="flex sm:hidden mt-8 justify-center">
         {nfts.length ? (
           <Link key={nfts[0].tokenId} prefetch={true} href={`/productDetail/${nfts[0].tokenId}`}>
             <Card className="w-[300px] h-[422px] rounded-[20px] mb-10 bg-[#232323] mx-auto">
