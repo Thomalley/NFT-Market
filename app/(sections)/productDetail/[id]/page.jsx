@@ -67,7 +67,7 @@ export default function ProductDetail({ params }) {
           className='sm:h-[903px] sm:w-[540px] object-cover rounded-[20px]'
         /> : (
           <Skeleton className='rounded-lg'>
-            <div className='h-[903px] w-[540px]'>
+            <div className='size-[366px] sm:h-[903px] sm:w-[540px]'>
             </div>
           </Skeleton>
         )}
@@ -175,7 +175,7 @@ export default function ProductDetail({ params }) {
             aria-label='Accordion Chart'
             startContent={<DescriptionIcon />}
             title='Price History'
-            className='sm:mt-4 group-[.is-splitted]:px-0'
+            className='mt-4 group-[.is-splitted]:px-0'
           >
             <Divider className='mb-4' />
             <Tooltip

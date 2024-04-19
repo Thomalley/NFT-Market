@@ -13,7 +13,7 @@ import useNft from '../../../hooks/useNft';
 
 export default function ReacentlyAddedCard() {
   const [nfts, setNfts] = useState([]);
-  const { getAllNfts } = useNft({ start: 14, end: 15 });
+  const { getAllNfts } = useNft({ start: 37, end: 38 });
   const getNfts = async () => {
     const response = await getAllNfts();
     if (response) setNfts(response);
@@ -21,9 +21,8 @@ export default function ReacentlyAddedCard() {
   useEffect(() => {
     getNfts();
   }, []);
-  console.log(nfts);
   return (
-    <Card className='sm:w-[400px] h-[600px] bg-[#232323] p-3'>
+    <Card className='sm:w-[400px] lg:w-[250px] 2xl:w-[400px] h-[600px] bg-[#232323] p-3'>
       <CardHeader>
         <h2 className='font-extrabold text-[22px]'>Recently added</h2>
       </CardHeader>

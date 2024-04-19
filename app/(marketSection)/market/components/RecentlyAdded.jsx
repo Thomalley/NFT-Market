@@ -14,7 +14,7 @@ export default function RecentlyAdded() {
   const options = ['option 1', 'option 2', 'option 3', 'option 4', 'option 5', 'option 6'];
 
   const [nfts, setNfts] = useState([]);
-  const { getAllNfts } = useNft({ start: 25, end: 33 });
+  const { getAllNfts } = useNft({ start: 38, end: 46 });
   const getNfts = async () => {
     const response = await getAllNfts();
     if (response) setNfts(response);
@@ -28,7 +28,7 @@ export default function RecentlyAdded() {
         <h1 className="text-[32px] font-extrabold">Recently Added</h1>
       </header>
       <div className="flex flex-col sm:flex-row sm:justify-between space-y-4 sm:space-y-0 mt-6">
-        <div className='flex flex-col sm:flex-row gap-x-3 gap-4 sm:gap-0'>
+        <div className='flex flex-col sm:flex-row sm:space-x-3 gap-4 sm:gap-0'>
           {buttonOptions.map((o, index) => (
             <Button
               variant="ghost"

@@ -27,7 +27,7 @@ export default function Navbar() {
   ];
   return (
     <nav className="flex flex-row mt-8 items-center justify-end mr-6 sm:mr-0 sm:justify-center gap-6 text-base font-medium bg-transparent">
-      <div className='w-fit hidden sm:flex gap-4'>
+      <div className='w-fit hidden sm:flex items-center gap-4'>
         <Link href="/" prefetch={true}>
           <Image src={Logo} alt="logo image" className="mr-14" />
         </Link>

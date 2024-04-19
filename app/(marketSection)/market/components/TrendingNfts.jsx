@@ -18,7 +18,7 @@ export default function TrendingNfts() {
   const [sort, setSort] = useState([]);
   const options = ['option 1', 'option 2', 'option 3', 'option 4', 'option 5', 'option 6'];
   const [nfts, setNfts] = useState([]);
-  const { getAllNfts } = useNft({ start: 17, end: 25 });
+  const { getAllNfts } = useNft({ start: 28, end: 36 });
   const getNfts = async () => {
     const response = await getAllNfts();
     if (response) setNfts(response);
@@ -44,10 +44,13 @@ export default function TrendingNfts() {
     arrows: false,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1290,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToShow: 2,
+          className: 'center',
+          centerMode: true,
+          centerPadding: '60px',
+          slidesToScroll: 2,
           infinite: true,
           dots: true,
         },
@@ -115,7 +118,7 @@ export default function TrendingNfts() {
         <h1 className="text-[32px] font-extrabold">Trending NFTs</h1>
       </header>
       <div className="flex flex-col sm:flex-row sm:justify-between space-y-4 sm:space-y-0 mt-6">
-        <div className='flex flex-col sm:flex-row gap-x-3 gap-4 sm:gap-0'>
+        <div className='flex flex-col sm:flex-row sm:space-x-3 gap-4 sm:gap-0'>
           {buttonOptions.map((o, index) => (
             <Button
               variant="ghost"

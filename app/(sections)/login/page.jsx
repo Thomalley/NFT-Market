@@ -40,7 +40,7 @@ export default function Login() {
     } else if (userLogin.password !== storedUser.password || userLogin.email !== storedUser.email) {
       toast.error('Wrong credentials');
     } else {
-      login(userLogin);
+      login();
       toast.success('Login successful! Redirecting...');
       router.push('/');
     }

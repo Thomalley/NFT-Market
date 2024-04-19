@@ -12,6 +12,9 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Poppins } from 'next/font/google';
 import Image from 'next/image';
+// eslint-disable-next-line import/no-unresolved
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 import Logo from '../../../../public/Logo.png';
 import MarketSectionActiveBidIcon from '../../../utils/MarketSectionActiveBidIcon.png';
 import MarketSectionMyCollectionIcon from '../../../utils/MarketSectionMyCollectionIcon.png';
@@ -26,6 +29,7 @@ import {
   MarketSectionSettingsIcon,
   MenuIcon,
 } from '../../../utils/svgs.jsx';
+import { userStore } from '../../../stores/userStore';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -33,8 +37,15 @@ const poppins = Poppins({
 });
 export default function SideBar() {
   const [menuSelected, setMenuSelected] = useState([]);
-  // const router = useRouter();
+  const logout = userStore((s) => s.logout);
+  const storedUser = userStore((s) => s.user);
+  const router = useRouter();
 
+  const handleLogout = () => {
+    logout();
+    toast.success('Logout successful! Redirecting...');
+    router.push('/');
+  };
   return (
     <nav className="flex flex-row sm:flex-col mt-5 sm:mt-0 pr-3 sm:pr-0 w-full sm:w-[280px] justify-end sm:justify-between gap-y-9 bg-transparent sm:bg-text-in-bg">
       <div className='hidden sm:flex flex-col justify-between w-full h-full'>
@@ -65,7 +76,7 @@ export default function SideBar() {
             </div>
             <h4 className='flex gap-3 font-medium text-base'>{MarketSectionHistoryIcon} History</h4>
             <h4 className='flex gap-3 font-medium text-base'>{MarketSectionSettingsIcon} Settings</h4>
-            <h4 className='flex gap-3 font-medium text-base'>{MarketSectionLogoutIcon} Logout</h4>
+            <h4 onClick={handleLogout} className={`${storedUser.logged ? '' : 'hidden'} cursor-pointer flex gap-3 font-medium text-base`}>{MarketSectionLogoutIcon} Logout</h4>
           </div>
         </div>
         <div className='space-y-5 w-full mb-10'>
@@ -94,16 +105,14 @@ export default function SideBar() {
             <Button className='ml-7 bg-light text-text-in-bg w-[220px] h-[44px] font-extrabold text-sm'>Create {MarketSectionCreateIcon}</Button>
           </DropdownItem>
           <DropdownItem
-            textValue='Market'
-          // key={value.label}
-          // onClick={() => router.push(value.href)}
+            textValue='Home'
           >
-            <h4 className='flex gap-3 font-medium text-base text-main-color'>{MarketSectionMarketIcon} Market</h4>
+            <Link href="/" prefetch={true}>
+              <h4 className='flex gap-3 font-medium text-base text-main-color'>{MarketSectionMarketIcon} Home</h4>
+            </Link>
           </DropdownItem>
           <DropdownItem
-            textValue='Market'
-          // key={value.label}
-          // onClick={() => router.push(value.href)}
+            textValue='Active bid'
           >
             <div className='flex gap-3 font-medium text-base -ml-[0.7px]'>
               <Image src={MarketSectionActiveBidIcon} alt='Active bid icon' />
@@ -111,16 +120,12 @@ export default function SideBar() {
             </div>
           </DropdownItem>
           <DropdownItem
-            textValue='Market'
-          // key={value.label}
-          // onClick={() => router.push(value.href)}
+            textValue='Explore'
           >
             <h4 className='flex gap-3 font-medium text-base'>{MarketSectionExploreIcon} Explore</h4>
           </DropdownItem>
           <DropdownItem
-            textValue='Market'
-          // key={value.label}
-          // onClick={() => router.push(value.href)}
+            textValue='My collection'
           >
             <div className='flex gap-3 font-medium text-base -ml-[0.7px]'>
               <Image src={MarketSectionMyCollectionIcon} alt='My collection icon' />
@@ -128,42 +133,32 @@ export default function SideBar() {
             </div>
           </DropdownItem>
           <DropdownItem
-            textValue='Market'
-          // key={value.label}
-          // onClick={() => router.push(value.href)}
+            textValue='My favourite'
           >
             <h4 className='flex gap-3 font-medium text-base'>{MarketSectionFavouriteIcon}My favourite</h4>
           </DropdownItem>
           <DropdownItem
-            textValue='Market'
-          // key={value.label}
-          // onClick={() => router.push(value.href)}
+            textValue='Wallet'
           >
             <div className='flex gap-3 font-medium text-base -ml-[0.7px]'>
               <Image src={MarketSectionWalletIcon} alt='Wallet icon' />
-              <h4 className='flex gap-3 font-medium text-base'>{ } Wallet</h4>
+              <h4 className='flex gap-3 font-medium text-base'>Wallet</h4>
             </div>
           </DropdownItem>
           <DropdownItem
-            textValue='Market'
-          // key={value.label}
-          // onClick={() => router.push(value.href)}
+            textValue='History'
           >
             <h4 className='flex gap-3 font-medium text-base'>{MarketSectionHistoryIcon} History</h4>
           </DropdownItem>
           <DropdownItem
-            textValue='Market'
-          // key={value.label}
-          // onClick={() => router.push(value.href)}
+            textValue='Settings'
           >
             <h4 className='flex gap-3 font-medium text-base'>{MarketSectionSettingsIcon} Settings</h4>
           </DropdownItem>
           <DropdownItem
-            textValue='Market'
-          // key={value.label}
-          // onClick={() => router.push(value.href)}
+            textValue='Logout'
           >
-            <h4 className='flex gap-3 font-medium text-base'>{MarketSectionLogoutIcon} Logout</h4>
+            <h4 onClick={handleLogout} className={`${storedUser.logged ? '' : 'hidden'} flex gap-3 font-medium text-base cursor-pointer`}>{MarketSectionLogoutIcon} Logout</h4>
           </DropdownItem>
         </DropdownMenu>
       </Dropdown>

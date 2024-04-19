@@ -15,7 +15,7 @@ import SkeletonCard from './SkeletonCard.jsx';
 
 export default function TopCollections() {
   const [nfts, setNfts] = useState([]);
-  const { getAllNfts } = useNft({ start: 5, end: 8 });
+  const { getAllNfts } = useNft({ start: 8, end: 11 });
   const getNfts = async () => {
     const response = await getAllNfts();
     if (response) setNfts(response);
@@ -60,8 +60,7 @@ export default function TopCollections() {
           </Tooltip>
 
         )) : (
-          <div className='flex gap-6'>
-            <SkeletonCard />
+          <div className='grid grid-cols-3 w-full gap-10 justify-center items-center text-center'>
             <SkeletonCard />
             <SkeletonCard />
             <SkeletonCard />

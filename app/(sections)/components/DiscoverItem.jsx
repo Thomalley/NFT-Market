@@ -17,7 +17,7 @@ export default function DiscoverItem() {
   const [sort, setSort] = useState([]);
   const options = ['option 1', 'option 2', 'option 3', 'option 4', 'option 5', 'option 6'];
   const [nfts, setNfts] = useState([]);
-  const { getAllNfts } = useNft({ start: 9, end: 17 });
+  const { getAllNfts } = useNft({ start: 19, end: 27 });
   const getNfts = async () => {
     const response = await getAllNfts();
     if (response) setNfts(response);

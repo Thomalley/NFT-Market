@@ -15,7 +15,7 @@ import SkeletonCard from './SkeletonCard.jsx';
 
 export default function FeaturedItem() {
   const [nfts, setNfts] = useState([]);
-  const { getAllNfts } = useNft({ start: 8, end: 15 });
+  const { getAllNfts } = useNft({ start: 12, end: 18 });
   const getNfts = async () => {
     const response = await getAllNfts();
     if (response) setNfts(response);
